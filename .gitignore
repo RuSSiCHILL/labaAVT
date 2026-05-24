@@ -1,4 +1,6 @@
 build/
-*.o 
-*.exe 
+*.o
+*.exe
 .vscode/
+*.a
+test_runner
