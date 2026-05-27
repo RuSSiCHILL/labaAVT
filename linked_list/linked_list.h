@@ -1,5 +1,7 @@
-#ifndef LINKED_LIST_H
-#define LINKED_LIST_H
+#ifndef LIST_H
+#define LIST_H
+
+#include <stddef.h>
 
 typedef struct Node {
     int data;
@@ -11,7 +13,7 @@ typedef struct SinglyLinkedList {
     int count;
 } SinglyLinkedList;
 
-SinglyLinkedList* create_list();
+SinglyLinkedList* create_list(void);
 void free_list(SinglyLinkedList* list);
 
 void add_first(SinglyLinkedList* list, int data);
@@ -20,8 +22,7 @@ int add_at(SinglyLinkedList* list, int position, int data);
 
 int remove_element(SinglyLinkedList* list, int data);
 Node* find_at(SinglyLinkedList* list, int position);
-int get_count(SinglyLinkedList* list);
-
-void print_list_to_file(SinglyLinkedList* list, const char* filename);
+int get_count(const SinglyLinkedList* list);
 
 #endif
+
