@@ -9,6 +9,7 @@ clean:
 	rm -rf *.o *.a *_test
 	rm -rf solve/*.o solve/*.a solve/solve_test
 	rm -rf stack/*.o stack/*.a stack/stack_test
+	rm -rf integral/*.o integral/*.a integral/integral_test
 
 format-check:
 	clang-format --dry-run --Werror $$(find . -name "*.c" -o -name "*.h")
@@ -44,9 +45,23 @@ stack/stack_test.o: stack/stack_test.c stack/stack.h
 stack/stack_test: stack/stack_test.o stack/stack.a
 	$(CC) $(CFLAGS) -static -o stack/stack_test stack/stack_test.o stack/stack.a
 
+# --- integral ---
+
+integral/integral.o: integral/integral.c integral/integral.h
+	$(CC) $(CFLAGS) -c integral/integral.c -o integral/integral.o
+
+integral/integral.a: integral/integral.o
+	ar rc integral/integral.a integral/integral.o
+
+integral/integral_test.o: integral/integral_test.c integral/integral.h
+	$(CC) $(CFLAGS) -c integral/integral_test.c -o integral/integral_test.o
+
+integral/integral_test: integral/integral_test.o integral/integral.a
+	$(CC) $(CFLAGS) -static -o integral/integral_test integral/integral_test.o integral/integral.a -lm
+
 # --- test ---
 
-test: solve/solve_test stack/stack_test
+test: solve/solve_test stack/stack_test integral/integral_test
 	@for t in $$(find . -name "*_test" -type f ! -name "*.c" ! -name "*.o"); do \
 		echo "Running $$t..."; \
 		./$$t || exit 1; \
