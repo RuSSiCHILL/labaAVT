@@ -62,16 +62,16 @@ integral/integral_test: integral/integral_test.o integral/integral.a
 
 # --- list ---
 
-list/list.o: list/list.c list/list.h
+linked_list/list.o: list/list.c list/list.h
 	$(CC) $(CFLAGS) -c list/list.c -o list/list.o
 
-list/list.a: list/list.o
+linked_list/list.a: list/list.o
 	ar rc list/list.a list/list.o
 
-list/list_test.o: list/list_test.c list/list.h
+linked_list/list_test.o: list/list_test.c list/list.h
 	$(CC) $(CFLAGS) -c list/list_test.c -o list/list_test.o
 
-list/list_test: list/list_test.o list/list.a
+linked_list/list_test: list/list_test.o list/list.a
 	$(CC) $(CFLAGS) -static -o list/list_test list/list_test.o list/list.a
 
 # --- test ---
