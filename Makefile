@@ -10,7 +10,7 @@ clean:
 	rm -rf solve/*.o solve/*.a solve/solve_test
 	rm -rf stack/*.o stack/*.a stack/stack_test
 	rm -rf integral/*.o integral/*.a integral/integral_test
-    rm -rf list/*.o list/*.a list/list_test
+	rm -rf list/*.o list/*.a list/list_test
 
 format-check:
 	clang-format --dry-run --Werror $$(find . -name "*.c" -o -name "*.h")
@@ -62,16 +62,16 @@ integral/integral_test: integral/integral_test.o integral/integral.a
 
 # --- list ---
 
-linked_list/list.o: list/list.c list/list.h
+list/list.o: list/list.c list/list.h
 	$(CC) $(CFLAGS) -c list/list.c -o list/list.o
 
-linked_list/list.a: list/list.o
+list/list.a: list/list.o
 	ar rc list/list.a list/list.o
 
-linked_list/list_test.o: list/list_test.c list/list.h
+list/list_test.o: list/list_test.c list/list.h
 	$(CC) $(CFLAGS) -c list/list_test.c -o list/list_test.o
 
-linked_list/list_test: list/list_test.o list/list.a
+list/list_test: list/list_test.o list/list.a
 	$(CC) $(CFLAGS) -static -o list/list_test list/list_test.o list/list.a
 
 # --- test ---
