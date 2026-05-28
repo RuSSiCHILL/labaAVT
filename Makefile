@@ -10,6 +10,7 @@ clean:
 	rm -rf solve/*.o solve/*.a solve/solve_test
 	rm -rf stack/*.o stack/*.a stack/stack_test
 	rm -rf integral/*.o integral/*.a integral/integral_test
+    rm -rf list/*.o list/*.a list/list_test
 
 format-check:
 	clang-format --dry-run --Werror $$(find . -name "*.c" -o -name "*.h")
