@@ -59,9 +59,23 @@ integral/integral_test.o: integral/integral_test.c integral/integral.h
 integral/integral_test: integral/integral_test.o integral/integral.a
 	$(CC) $(CFLAGS) -static -o integral/integral_test integral/integral_test.o integral/integral.a -lm
 
+# --- list ---
+
+list/list.o: list/list.c list/list.h
+	$(CC) $(CFLAGS) -c list/list.c -o list/list.o
+
+list/list.a: list/list.o
+	ar rc list/list.a list/list.o
+
+list/list_test.o: list/list_test.c list/list.h
+	$(CC) $(CFLAGS) -c list/list_test.c -o list/list_test.o
+
+list/list_test: list/list_test.o list/list.a
+	$(CC) $(CFLAGS) -static -o list/list_test list/list_test.o list/list.a
+
 # --- test ---
 
-test: solve/solve_test stack/stack_test integral/integral_test
+test: solve/solve_test stack/stack_test integral/integral_test list/list_test
 	@for t in $$(find . -name "*_test" -type f ! -name "*.c" ! -name "*.o"); do \
 		echo "Running $$t..."; \
 		./$$t || exit 1; \
